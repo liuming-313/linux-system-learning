@@ -1,0 +1,39 @@
+#question 2:
+dir=$(pwd)
+echo ‘current dir is $dir’
+
+for i in `seq 1 100`; do
+   mkdir DDM$i
+   cd DDM$i
+   touch time_till_now.txt
+   echo 'nanoseconds since 1970-01-01 00:00:00 UTC:'>>time_till_now.txt
+   echo "<"$(date +%s%N)">" >>time_till_now.txt
+   cd ..
+   pwd
+done
+
+
+#question 3:
+#find the location of the file “blocklist.xml” and replace ‘\’ to ‘\\’
+
+import os
+import re
+os.getcwd()
+os.chdir("E:\\全A+\\5001 Introduction to Computational and Modeling Tools\\HW1")#find the location of the file and replace ‘\’ to ‘\\’
+file_obj= open('blocklist.xml','r')
+a=file_obj.readlines()
+
+#question 3 (1)
+
+for i in a:
+    if re.search(r'blockID="i.+[0-9]"',i)!=None or re.search(r'blockID="g.+[0-9]"',i)!=None:  
+        print(i)
+        
+#question 3 (2)            
+for i in a:
+    if re.search(r'id=".+@.+"',i)!=None:    
+        result=re.search(r'id=".+@.+"',i).group(0)
+        
+        if "^" not in result and "/" not in result and "\\" not in result:
+            print(i) 
+
